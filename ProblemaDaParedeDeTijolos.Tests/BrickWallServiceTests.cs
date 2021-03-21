@@ -1,7 +1,6 @@
 using ProblemaDaParedeDeTijolos.Services;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using Xunit;
 
@@ -28,39 +27,15 @@ namespace ProblemaDaParedeDeTijolos.Tests
         }
 
         [Fact]
-        public void Test_With_Input_Size_Of_500_x_400()
+        public void With_Input_Of_Any_Size()
         {
             Random rand = new Random();
 
-            List<List<int>> input = Enumerable.Range(0, 4000)
-                .Select(n => new List<int>(Enumerable.Range(0, 1000).Select(l => rand.Next(10))))
+            List<List<int>> input = Enumerable.Range(0, 500)
+                .Select(n => new List<int>(Enumerable.Range(0, 200).Select(l => rand.Next(10))))
                 .ToList();
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
 
             int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricks(input);
-
-            stopwatch.Stop();
-
-        }
-
-        [Fact]
-        public void Test_With_Input_Size_Of_500_x_400_Parallel()
-        {
-            Random rand = new Random();
-
-            List<List<int>> input = Enumerable.Range(0, 4000)
-                .Select(n => new List<int>(Enumerable.Range(0, 1000).Select(l => rand.Next(10))))
-                .ToList();
-
-            Stopwatch stopwatch = new Stopwatch();
-            stopwatch.Start();
-
-            int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricksParallel(input);
-
-            stopwatch.Stop();
-
         }
     }
 }

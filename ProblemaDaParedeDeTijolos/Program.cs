@@ -19,7 +19,7 @@ namespace ProblemaDaParedeDeTijolos
                 new List<int>(){ 1, 3, 1, 1 }
             };
 
-            int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricksFlatten(input);
+            int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricks(input);
 
             Console.WriteLine(minNumberOfBrokenBricks);
         }
