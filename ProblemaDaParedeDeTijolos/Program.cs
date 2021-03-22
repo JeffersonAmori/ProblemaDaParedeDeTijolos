@@ -12,7 +12,7 @@ namespace ProblemaDaParedeDeTijolos
             List<List<int>> input = new List<List<int>>()
             {
                 new List<int>(){ 1, 2, 2, 1 },
-                new List<int>(){ 3, 1, 2},
+                new List<int>(){ 3, 1, 2 },
                 new List<int>(){ 1, 3, 2 },
                 new List<int>(){ 2, 4 },
                 new List<int>(){ 3, 1, 2 },
@@ -23,6 +23,4 @@ namespace ProblemaDaParedeDeTijolos
 
             Console.WriteLine(minNumberOfBrokenBricks);
         }
-
-        
     }}

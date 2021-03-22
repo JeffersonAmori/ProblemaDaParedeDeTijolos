@@ -26,13 +26,17 @@ namespace ProblemaDaParedeDeTijolos.Tests
             Assert.Equal(2, minNumberOfBrokenBricks);
         }
 
-        [Fact]
-        public void With_Input_Of_Any_Size()
+        [Theory]
+        [InlineData(50, 20)]
+        [InlineData(300, 200)]
+        [InlineData(1000, 1000)]
+        [InlineData(5000, 4000)]
+        public void With_Input_Of_Varius_Sizes_For_Preformance_Porposes_N(int columns, int lines)
         {
             Random rand = new Random();
 
-            List<List<int>> input = Enumerable.Range(0, 300)
-                .Select(n => new List<int>(Enumerable.Range(0, 200).Select(l => rand.Next(10))))
+            List<List<int>> input = Enumerable.Range(0, columns)
+                .Select(n => new List<int>(Enumerable.Range(0, lines).Select(l => rand.Next(10))))
                 .ToList();
 
             int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricks(input);

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace ProblemaDaParedeDeTijolos.Services
@@ -11,36 +9,24 @@ namespace ProblemaDaParedeDeTijolos.Services
     {
         public static int CalculateNumberOfMinBrokenBricks(List<List<int>> input)
         {
-            int minNumberOfBrokenBricks = int.MaxValue;
             var edgesOfBricksInWall = new ConcurrentDictionary<int, IEnumerable<int>>();
+            var bricksEdges = new ConcurrentBag<List<int>>();
 
-            int wallLength = input.FirstOrDefault().Sum();
+            Parallel.For(0, input.Count, i =>
+            {
+                var brickLine = input[i];
 
-            // Iterate over the columns of the wall
-            Parallel.For(1, wallLength, (i, state) =>
-             {
-                 // For each column iterate over each line/row of the wall
-                 var numberOfBrokenBricksInColumn = default(int);
-                 Parallel.For(0, input.Count, j =>
-                 {
-                     var brickLine = input[j];
+                bricksEdges
+                    .Add(Accumulate(brickLine.Take(brickLine.Count - 1))
+                    .ToList());
+            });
 
-                     edgesOfBricksInWall.TryAdd(j, Accumulate(brickLine));
+            var maxOccurrencesOfBrickEdgeInSameColumn = bricksEdges
+                                                           .SelectMany(b => b)
+                                                           .GroupBy(b => b)
+                                                           .Max(g => g.Count());
 
-                     var bricksEdges = edgesOfBricksInWall[j];
-
-                     if (!bricksEdges.Contains(i))
-                         Interlocked.Add(ref numberOfBrokenBricksInColumn, 1);
-                 });
-
-                 Interlocked.Exchange(ref minNumberOfBrokenBricks, Math.Min(minNumberOfBrokenBricks, numberOfBrokenBricksInColumn));
-
-                 // If there is a line that would break no bricks end finish processing
-                 if (minNumberOfBrokenBricks == 0)
-                     state.Break();
-             });
-
-            return minNumberOfBrokenBricks;
+            return input.Count - maxOccurrencesOfBrickEdgeInSameColumn;
         }
 
         private static IEnumerable<int> Accumulate(IEnumerable<int> list)
