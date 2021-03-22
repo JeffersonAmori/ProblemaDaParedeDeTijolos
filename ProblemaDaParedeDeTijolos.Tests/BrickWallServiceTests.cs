@@ -31,7 +31,7 @@ namespace ProblemaDaParedeDeTijolos.Tests
         [InlineData(300, 200)]
         [InlineData(1000, 1000)]
         [InlineData(5000, 4000)]
-        public void With_Input_Of_Varius_Sizes_For_Preformance_Porposes_N(int columns, int lines)
+        public void With_Input_Of_Varius_Sizes_For_Preformance_Porposes(int columns, int lines)
         {
             Random rand = new Random();
 
