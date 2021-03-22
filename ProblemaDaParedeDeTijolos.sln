@@ -3,9 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31105.61
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemaDaParedeDeTijolos", "ProblemaDaParedeDeTijolos\ProblemaDaParedeDeTijolos.csproj", "{DA4A499A-5CD9-43B8-B321-986E714ABE0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProblemaDaParedeDeTijolos", "ProblemaDaParedeDeTijolos\ProblemaDaParedeDeTijolos.csproj", "{DA4A499A-5CD9-43B8-B321-986E714ABE0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProblemaDaParedeDeTijolos.Tests", "ProblemaDaParedeDeTijolos.Tests\ProblemaDaParedeDeTijolos.Tests.csproj", "{F8533744-37D3-4554-A68F-34102D69EDEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ProblemaDaParedeDeTijolos.Tests", "ProblemaDaParedeDeTijolos.Tests\ProblemaDaParedeDeTijolos.Tests.csproj", "{F8533744-37D3-4554-A68F-34102D69EDEB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Problem", "Problem", "{78E0F845-3A9F-4075-9087-14D5B0BD7F2A}"
+	ProjectSection(SolutionItems) = preProject
+		ProblemaDaParedeDeTijolos\CodingChallenge-ParedeDeTijolos.pdf = ProblemaDaParedeDeTijolos\CodingChallenge-ParedeDeTijolos.pdf
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

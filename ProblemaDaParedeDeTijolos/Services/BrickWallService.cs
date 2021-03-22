@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -10,24 +11,21 @@ namespace ProblemaDaParedeDeTijolos.Services
     {
         public static int CalculateNumberOfMinBrokenBricks(List<List<int>> input)
         {
-            object _lock1 = new object();
             int minNumberOfBrokenBricks = int.MaxValue;
-            var edgesOfBricksInWall = new Dictionary<int, IEnumerable<int>>();
+            var edgesOfBricksInWall = new ConcurrentDictionary<int, IEnumerable<int>>();
 
-            int wallLenght = input.FirstOrDefault().Sum();
+            int wallLength = input.FirstOrDefault().Sum();
 
-            Parallel.For(1, wallLenght, (i, state) =>
+            // Iterate over the columns of the wall
+            Parallel.For(1, wallLength, (i, state) =>
              {
+                 // For each column iterate over each line/row of the wall
                  var numberOfBrokenBricksInColumn = default(int);
                  Parallel.For(0, input.Count, j =>
                  {
                      var brickLine = input[j];
 
-                     lock (_lock1)
-                     {
-                         if (!edgesOfBricksInWall.ContainsKey(j))
-                             edgesOfBricksInWall.Add(j, Accumulate(brickLine));
-                     }
+                     edgesOfBricksInWall.TryAdd(j, Accumulate(brickLine));
 
                      var bricksEdges = edgesOfBricksInWall[j];
 
@@ -37,6 +35,7 @@ namespace ProblemaDaParedeDeTijolos.Services
 
                  Interlocked.Exchange(ref minNumberOfBrokenBricks, Math.Min(minNumberOfBrokenBricks, numberOfBrokenBricksInColumn));
 
+                 // If there is a line that would break no bricks end finish processing
                  if (minNumberOfBrokenBricks == 0)
                      state.Break();
              });
