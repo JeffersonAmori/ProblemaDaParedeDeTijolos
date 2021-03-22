@@ -31,8 +31,8 @@ namespace ProblemaDaParedeDeTijolos.Tests
         {
             Random rand = new Random();
 
-            List<List<int>> input = Enumerable.Range(0, 3000)
-                .Select(n => new List<int>(Enumerable.Range(0, 2000).Select(l => rand.Next(10))))
+            List<List<int>> input = Enumerable.Range(0, 300)
+                .Select(n => new List<int>(Enumerable.Range(0, 200).Select(l => rand.Next(10))))
                 .ToList();
 
             int minNumberOfBrokenBricks = BrickWallService.CalculateNumberOfMinBrokenBricks(input);
